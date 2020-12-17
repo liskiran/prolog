@@ -1,0 +1,5 @@
+replace([], []):-!.
+replace([value|tail], [new_value|new_tail]):-
+  !, replace(tail, value, new_value, new_tail).
+replace([head|tail], value, new_value, [head|new_tail]):-
+  replace(tail, value, new_value, new_tail).

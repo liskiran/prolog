@@ -1,0 +1,12 @@
+negative_pos([], _, []):-!.
+
+negative_pos([Head1|Tail], Index, [Head2|Tail2]):-
+   Head1 < 0, !,
+   Head2 is Index + 1,
+   negative_pos(Tail, Head2, Tail2).
+
+negative_pos([Head1|Tail], Index, [Head1|Tail2]):-
+   negative_pos(Tail, Index + 1, Tail2).
+
+neg_pos(List1, List2):-
+   negative_pos(List1, 0, List2).

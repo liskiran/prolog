@@ -1,0 +1,4 @@
+double_values_of_list([], []):-!.
+double_values_of_list([OldHead|Tail1], [NewHead|Tail2]):-
+    NewHead is OldHead * 2,
+    double_values_of_list(Tail1, Tail2).

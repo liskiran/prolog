@@ -1,0 +1,17 @@
+gcd(M, N, M):-
+    M mod N = 0, !.
+gcd(M, N, M):-
+    N = 0, fail.
+gcd(M, N, N):-
+    M = 0, fail.
+gcd(M, N, GCD):-
+    N > M,
+    X is N mod M,
+    gcd(X, M, GCD), !.
+gcd(M, N, GCD):-
+    M > N,
+    X is M mod N,
+    gcd(X, M, GCD), !.
+nok(M, N, F):-
+    gcd(M, N, Z),
+    F is M * N / Z.

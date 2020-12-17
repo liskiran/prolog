@@ -1,0 +1,7 @@
+func(N, F):-
+  N > 0,
+  func1(N, 1, F).
+
+func1(N, K, F):-
+  N >= K, !,
+  F is K + func1(N, K+2, F).

@@ -1,0 +1,13 @@
+delete_elements(_, C, C, List):-!.
+
+delete_elements([Head|List], Start_count, End_count, [Head|List]):-
+    Start_count < End_count - 1,
+    Next_count is Start_count + 1,
+    delete_elements(List, Next_count, End_count, List).
+
+delete_elements([Head|List], Start_count, End_count, [Head|List]):-
+    Start_count =:= End_count,
+    delete_elements([Head|List], Start_count, End_count, List).
+
+del_elem(List, Count, NewList):-
+    delete_elements(List, 0, Count, NewList).

@@ -1,0 +1,11 @@
+delete_duplicate_values([H|T],T1):-
+    member_(H,T),
+    delete_dublivate_values(T,T1).
+delete_duplicate_values([H|T],[H|T1]):-
+    not(member_(H,T)),
+    delete_duplicate_values(T,T1).
+delete_duplicate_values([],[]).
+
+member_(H,[H|_]).
+member_(H,[_|T]):-
+    member_(H,T).

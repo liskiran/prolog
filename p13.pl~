@@ -1,0 +1,14 @@
+%столбцы текущей матрицы и есть транспонированная матрица
+first_elem_lists([], []).
+first_elem_lists([[Head|_]|Tail], [Head|Tail1]) :- % первые элементы списков собираем в один
+  first_elem_lists(Tail, Tail1).
+
+next_column([], []).
+next_column([[_|Tail]|Tailss], [Tail|Tails]) :- % удаляем первые элементы списков
+  next_column(Tailss, Tails).
+
+transposing([[]|_], []).
+transposing(Matrix, [Tail|Tails]) :-
+  just(Matrix, Tail),
+  next_column(Matrix, Next),
+  transposing(Next, Tails). % делаем так, пока списки не пусты

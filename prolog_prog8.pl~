@@ -1,13 +1,27 @@
-delete_elements(_, C, C, List):-!.
-
-delete_elements([Head|List], Start_count, End_count, [Head|List]):-
-    Start_count < End_count - 1,
-    Next_count is Start_count + 1,
-    delete_elements(List, Next_count, End_count, List).
-
-delete_elements([Head|List], Start_count, End_count, [Head|List]):-
-    Start_count =:= End_count,
-    delete_elements([Head|List], Start_count, End_count, List).
-
-del_elem(List, Count, NewList):-
-    delete_elements(List, 0, Count, NewList).
+del_tail(List1, List2, N):-
+    length_list(List1, M1),
+    M1 >= N,
+    M2 is M1 - N,
+    delete_tail(List1, List2, M2).
+%сравниваем длину списка и количество удалений с конца
+% для этого пишем функцию длины списка
+delete_tail([], [], _):-!.
+%если список пуст заканчиваем
+delete_tail(_, [], N):-
+    N =< 0, !.
+%если счетчик меньше нуля заканчиваем
+delete_tail([H|T], [H|T1], N):-
+    N1 = N - 1,
+    delete_tail(T, T1, N1).
+% пока счетчик больше нуля удаляем конец
+length_list(List, Length):-
+   length_list(List, 0, Length).
+% счетчик для измерения длины
+length_list([], Length, Length):-!.
+% когда список пуст мы заканчиваем
+length_list([_Head|Tail], Buffer, Length):-
+   NewBuffer is Buffer + 1,
+   length_list(Tail, NewBuffer, Length).
+%удаляем голову и возвращаем хвост и так пока не пустой список
+%NewBuffer накапливает значение длины списка
+%work

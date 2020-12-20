@@ -4,34 +4,34 @@ min([], Min, Min).
 min([L|Ls], Min0, Min) :-
     Min1 is min(L, Min0),
     min(Ls, Min1, Min).
-% ищем минимальный элемент
+% РёС‰РµРј РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚
 
 
 del(_,[],[]).
 del(H,[H|T],T).
 del(X,[H|T],[H|T_]):-
-    del(X,T,T_). % удаляем минимальный элемент
+    del(X,T,T_). % СѓРґР°Р»СЏРµРј РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚
 
-kon(El, L, Res) :-
+insert_head(El, L, Res) :-
     append([El], L, Res).
 
 ssort([],_).
 ssort([],[]).
 ssort(L, Ans):-
-    min(L, Min),
-    del(Min, L, L1),
-    insert_sort(L1, L2),
-    kon(Min, L2, Ans).
+    min(L, Min), % РЅР°С…РѕРґРёРј РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚
+    del(Min, L, L1), % СѓРґР°Р»СЏРµРј РµРіРѕ РёР· СЃРїРёСЃРєР°
+    insert_sort(L1, L2),% СЃРѕСЂС‚РёСЂСѓРµРј РѕСЃС‚Р°РІС€РёР№СЃСЏ СЃРїРёСЃРѕРє
+    insert_head(Min, L2, Ans). % РїСЂРёРїРёРјС‹РІР°РµРј РІ РЅР°С‡Р°Р»Рѕ РјРёРЅРёР»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ Рё РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ СЃРїРёСЃРѕРє
 
 insert_sort([], []).
 
-%если пустой список возвращаем пустой список
+%РµСЃР»Рё РїСѓСЃС‚РѕР№ СЃРїРёСЃРѕРє РІРѕР·РІСЂР°С‰Р°РµРј РїСѓСЃС‚РѕР№ СЃРїРёСЃРѕРє
 insert_sort([X | Tail], Sorted_list):-
-    insert_sort(Tail, Sorted_Tail), %сортируем хвост
-    insert(X, Sorted_Tail, Sorted_list). % вставляем в сортированный хвост голову
+    insert_sort(Tail, Sorted_Tail), %СЃРѕСЂС‚РёСЂСѓРµРј С…РІРѕСЃС‚
+    insert(X, Sorted_Tail, Sorted_list). % РІСЃС‚Р°РІР»СЏРµРј РІ СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ С…РІРѕСЃС‚ РіРѕР»РѕРІСѓ
 
 insert(X, [Y | Sorted_list], [Y | Sorted_list1]):-
-    X > Y, !,% если x < y идем дальше по списку
+    X > Y, !,% РµСЃР»Рё x < y РёРґРµРј РґР°Р»СЊС€Рµ РїРѕ СЃРїРёСЃРєСѓ
     insert(X, Sorted_list, Sorted_list1).
 
 insert(X, Sorted_list, [X | Sorted_list]).

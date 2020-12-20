@@ -2,16 +2,18 @@ index_([X | _], 1, X) :- !.
 
 index_([_ | L], N, Y) :-
     N1 is N - 1,
-    index_(L, N1, Y).
+    index_(L, N1, Y). % найти значение элемента по индексу
 
 replace([_|T], 1, X, [X|T]).
 replace([H|T], I, X, [H|R]):-
     I > 0,
     I1 is I - 1,
-    replace(T, I1, X, R).
+    replace(T, I1, X, R). % заменить элемент по индексу
 
 replace_two_elements(L, N1, N2, ListRes):-
-    index_(L, N1, El1),
-    index_(L, N2, El2),
-    replace(L, N2, El1, ListRes1),
-    replace(ListRes1, N1, El2, ListRes).
+    index_(L, N1, El1), % находим первый элемент
+    index_(L, N2, El2), % нахожим второй элемент
+    replace(L, N2, El1, ListRes1), % меняем 2 элемент на 1
+    replace(ListRes1, N1, El2, ListRes). % меняем 1 элемент на 2 и возвращаем список
+
+

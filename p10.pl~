@@ -1,0 +1,17 @@
+index_([X | _], 1, X) :- !.
+
+index_([_ | L], N, Y) :-
+    N1 is N - 1,
+    index_(L, N1, Y).
+
+replace([_|T], 1, X, [X|T]).
+replace([H|T], I, X, [H|R]):-
+    I > 0,
+    I1 is I - 1,
+    replace(T, I1, X, R).
+
+replace_two_elements(L, N1, N2, ListRes):-
+    index_(L, N1, El1),
+    index_(L, N2, El2),
+    replace(L, N2, El1, ListRes1),
+    replace(ListRes1, N1, El2, ListRes).

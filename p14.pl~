@@ -1,0 +1,37 @@
+min([L|Ls], Min) :-
+    min(Ls, L, Min).
+min([], Min, Min).
+min([L|Ls], Min0, Min) :-
+    Min1 is min(L, Min0),
+    min(Ls, Min1, Min).
+% ищем минимальный элемент
+
+
+del(_,[],[]).
+del(H,[H|T],T).
+del(X,[H|T],[H|T_]):-
+    del(X,T,T_). % удаляем минимальный элемент
+
+kon(El, L, Res) :-
+    append([El], L, Res).
+
+ssort([],_).
+ssort([],[]).
+ssort(L, Ans):-
+    min(L, Min),
+    del(Min, L, L1),
+    insert_sort(L1, L2),
+    kon(Min, L2, Ans).
+
+insert_sort([], []).
+
+%если пустой список возвращаем пустой список
+insert_sort([X | Tail], Sorted_list):-
+    insert_sort(Tail, Sorted_Tail), %сортируем хвост
+    insert(X, Sorted_Tail, Sorted_list). % вставляем в сортированный хвост голову
+
+insert(X, [Y | Sorted_list], [Y | Sorted_list1]):-
+    X > Y, !,% если x < y идем дальше по списку
+    insert(X, Sorted_list, Sorted_list1).
+
+insert(X, Sorted_list, [X | Sorted_list]).

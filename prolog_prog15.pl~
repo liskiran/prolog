@@ -1,0 +1,13 @@
+insert_sort([], []).
+%если пустой список возвращаем пустой список
+insert_sort([X | Tail], Sorted_list):-
+    insert_sort(Tail, Sorted_Tail), %сортируем хвост
+    insert(X, Sorted_Tail, Sorted_list). % вставляем в сортированный хвост голову
+
+insert(X, [Y | Sorted_list], [Y | Sorted_list1]):-
+    X > Y, !,% если x < y идем дальше по списку
+    insert(X, Sorted_list, Sorted_list1).
+
+insert(X, Sorted_list, [X | Sorted_list]).
+% соединяем
+% work

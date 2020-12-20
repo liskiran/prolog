@@ -1,0 +1,10 @@
+s_m_v(List1, List2, Res):-
+    scalar_multiply_vectors(List1, List2, 0, Res).
+% 0 нужен для накапливания суммы
+scalar_multiply_vectors([],[], Res, Res):-!. %если списки пусты заканчиваем
+scalar_multiply_vectors([H1|L1], [H2|L2], Res1, Res):-
+    %перемножаем элементы головы
+    Res2 is Res1 + H1 * H2,
+    scalar_multiply_vectors(L1, L2, Res2, Res).
+% работаем так пока списки не станут пустыми
+%work

@@ -1,0 +1,27 @@
+del_tail(List1, List2, N):-
+    length_list(List1, M1),
+    M1 >= N,
+    M2 is M1 - N,
+    delete_tail(List1, List2, M2).
+%сравниваем длину списка и количество удалений с конца
+% для этого пишем функцию длины списка
+delete_tail([], [], _):-!.
+%если список пуст заканчиваем
+delete_tail(_, [], N):-
+    N =< 0, !.
+%если счетчик меньше нуля заканчиваем
+delete_tail([H|T], [H|T1], N):-
+    N1 = N - 1,
+    delete_tail(T, T1, N1).
+% пока счетчик больше нуля удаляем конец
+length_list(List, Length):-
+   length_list(List, 0, Length).
+% счетчик для измерения длины
+length_list([], Length, Length):-!.
+% когда список пуст мы заканчиваем
+length_list([_Head|Tail], Buffer, Length):-
+   NewBuffer is Buffer + 1,
+   length_list(Tail, NewBuffer, Length).
+%удаляем голову и возвращаем хвост и так пока не пустой список
+%NewBuffer накапливает значение длины списка
+%work
